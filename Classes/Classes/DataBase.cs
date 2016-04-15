@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace Classes
 {
-    class DataBase
+    public class DataBase
     {
         public string serverType;
         public string connectionString;

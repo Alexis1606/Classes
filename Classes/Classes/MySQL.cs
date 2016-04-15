@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Classes
 {
-    class MySQL
+    public class MySQL
     {
         public string server;
         public string user;

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Classes
 {
-    class ProcesamientoTexto
+    public class ProcesamientoTexto
     {
         ///<summary> 
 		/// Recibe como prametro un string que representa un renglon y devuelve un arreglo de strings que en cada posición tiene una palabra del renglon

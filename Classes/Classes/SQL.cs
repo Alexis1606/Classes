@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Classes
 {
-    class SQL
+    public class SQL
     {
         public string connectionString;
         public string query;

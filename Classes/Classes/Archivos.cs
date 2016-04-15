@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    class Archivos
+    public class Archivos
     {
         /*Reads a file and returns an array of Strings in which each position of the array is a row of the file.
           Receives as parameter the path to follow in which the file is located.*/
