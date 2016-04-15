@@ -18,7 +18,7 @@ namespace Classes
 
         public DataBase(string serverType, string user, string password, string server, string database)
         {
-            this.serverType = serverType;
+	            this.serverType = serverType;
             #region SQL
             if (serverType == "SQL")
             {

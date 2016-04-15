@@ -5,6 +5,7 @@
 *- Method for connecting to database to database
 *- Method for disconnecting from database
 *- Method for query insert
+*- Method for requesting all data from a table
 *
 *
 */
@@ -14,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,19 +33,24 @@ namespace Classes
 
         public SQL(string user, string password, string server, string database)
         {
-            connectionString = "Server=" + server + ";Database=" + database + ";User=" + user + ";Password=" + password + ";Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        }
+			connectionString = "Persist Security Info=False;Integrated Security=False;Server=" + server + ";Database=" + database + ";User=" + user + ";Password=" + password + ";Encrypt=False;Connection Timeout=30;";
+			Console.WriteLine ("Creado");
+		}
 
         public bool conectar()
         {
-            bool res = false;
+			Console.WriteLine("Intentando conectar");
+			bool res = false;
             try
             {
+
                 SQLconn = new SqlConnection(connectionString);
+
                 SQLconn.Open();
                 res = true;
+				Console.WriteLine("Conexion exitosa");
             }
-            catch (SqlException ex)
+			catch (Exception ex)
             {
                 Console.WriteLine("No se pudo establecer conexión con la lase de datos:\n" + ex);
             }
@@ -95,5 +102,21 @@ namespace Classes
             }
             return res;
         }
+
+		public ArrayList obtenerTODO(string table){
+			ArrayList res = new ArrayList ();
+			if (this.conectar ()) {
+				query = "Select * from " + table;
+				SqlCommand cmd = new SqlCommand (query, connectionString);
+				SqlDataReader reader = cmd.ExecuteReader ();
+				while (reader.Read ()) {
+					res.Add (reader.Read ());
+				}
+				this.desconectar ();
+			}
+			return res;
+		}
+
+
     }
 }
