@@ -18,7 +18,7 @@ namespace Classes
 
         public DataBase(string serverType, string user, string password, string server, string database)
         {
-	            this.serverType = serverType;
+            this.serverType = serverType;
             #region SQL
             if (serverType == "SQL")
             {
@@ -70,16 +70,16 @@ namespace Classes
             return res;
 
         }
-        public bool insert(string table, ArrayList values)
+        public string insert(string table, ArrayList values)
         {
-            bool res = false;
+            string res = "";
             if (conectar())
             {
 
                 #region SQL
                 if (serverType == "SQL")
                 {
-                    databaseSQL.insert(table, values);
+                    res = databaseSQL.insert(table, values);
                 }
 
                 #endregion
@@ -125,6 +125,42 @@ namespace Classes
                 Console.WriteLine("Server type no válido\n Servidores válidos: SQL, MySQL");
             }
             #endregion
+            return res;
+        }
+
+        public ArrayList obtenerTodo(string table)
+        {
+            ArrayList res = new ArrayList();
+            if (serverType == "SQL")
+                res = databaseSQL.obtenerTodo(table);
+            else if (serverType == "MySQL")
+            {
+                res = null;
+            }
+            return res;
+        }
+
+        public string baja(string col, string value, string table)
+        {
+            string res = "";
+            if (serverType == "SQL")
+                res = databaseSQL.baja(col, value, table);
+            else if (serverType == "MySQL")
+            {
+                res = "";
+            }
+            return res;
+        }
+
+        public string update(ArrayList columns, ArrayList values, string conditionColumn, string conditionValue, string table)
+        {
+            string res = "";
+            if (serverType == "SQL")
+                res = databaseSQL.update(columns, values, conditionColumn, conditionValue, table);
+            else if (serverType == "MySQL")
+            {
+                res = "";
+            }
             return res;
         }
     }

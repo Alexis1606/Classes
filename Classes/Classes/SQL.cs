@@ -72,51 +72,117 @@ namespace Classes
             return res;
         }
 
-        public bool insert(string table, ArrayList values)
+        public string insert(string table, ArrayList values)
         {
-            bool res = false;
+            String error = "";
             if (conectar())
             {
-                query = "Insert into " + table + " values(";
+                query = "Insert into " + table + " values('";
 
 
                 for (int i = 0; i < values.Count; i++)
                 {
                     query += values[i].ToString();
                     if (i < values.Count - 1)
-                        query += ",";
+                        query += "','";
                     else
-                        query += ");";
+                        query += "');";
                 }
+				Console.WriteLine (query);
                 SqlCommand cmd = new SqlCommand(query, SQLconn);
                 try
                 {
                     cmd.ExecuteNonQuery();
-                    res = true;
+                    error ="";
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("error:\n" + ex);
+					error = ex.ToString();
                 }
                 SQLconn.Close();
             }
-            return res;
+            return error;
         }
 
-		public ArrayList obtenerTODO(string table){
+		public ArrayList obtenerTodo(string table){
 			ArrayList res = new ArrayList ();
+            int index = 0;
 			if (this.conectar ()) {
 				query = "Select * from " + table;
-				SqlCommand cmd = new SqlCommand (query, connectionString);
+				SqlCommand cmd = new SqlCommand (query, SQLconn);
 				SqlDataReader reader = cmd.ExecuteReader ();
 				while (reader.Read ()) {
-					res.Add (reader.Read ());
-				}
+                    string[] temp = new string[reader.FieldCount];
+                    for(int i = 0; i < reader.FieldCount; i++)
+                    {
+                        temp[i] = reader[i].ToString();
+                    } 
+                    res.Add (temp);
+ 				}
 				this.desconectar ();
 			}
 			return res;
 		}
 
+        public string baja(string col, string value,string table)
+        {
+            String error = "";
+            query = "delete " + table + " where " + col + " = " + value+(";");
+            if (this.conectar())
+            {
+                SqlCommand cmd = new SqlCommand(query, SQLconn);
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }catch(Exception e)
+                {
+                    error = e.ToString();
+                }
+                this.desconectar();
+            }
+            else
+            {
+                error = "No se pudo conectar con la base de datos";
+            }
+            return error;
+        }
 
+        public string update(ArrayList columns, ArrayList values,string conditionColumn,string conditionValue, string table)
+        {
+            string error = "";
+            if (columns.Count == values.Count)
+            {
+
+                if (this.conectar())
+                {
+                    query = "update " + table + " set ";
+                    for (int i = 0; i < columns.Count; i++)
+                    {
+                        query += columns[i].ToString() + "='" + values[i].ToString();
+                        if (i < columns.Count - 1)
+                            query += "',";
+                    }
+                    query += "'where " + conditionColumn + "='" + conditionValue + "';";
+                    SqlCommand cmd = new SqlCommand(query, SQLconn);
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception e)
+                    {
+                        error = e.ToString();
+                    }
+                    this.desconectar();
+                }
+                else
+                    error = "No se pudo conectar a la base de datos";
+
+            }
+            else
+                error = "no coincide el numero de valores con el de columnas";
+            
+            return error;
+        }
     }
 }
