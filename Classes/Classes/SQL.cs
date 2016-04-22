@@ -125,6 +125,27 @@ namespace Classes
 			return res;
 		}
 
+        public ArrayList obtenerCustom(string table, string query)
+        {
+            ArrayList res = new ArrayList();
+            if (this.conectar())
+            {
+                SqlCommand cmd = new SqlCommand(query, SQLconn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string[] temp = new string[reader.FieldCount];
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        temp[i] = reader[i].ToString();
+                    }
+                    res.Add(temp);
+                }
+                this.desconectar();
+            }
+            return res;
+        }
+
         public string baja(string col, string value,string table)
         {
             String error = "";

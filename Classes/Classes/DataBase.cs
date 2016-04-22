@@ -140,6 +140,19 @@ namespace Classes
             return res;
         }
 
+        public ArrayList obtenerCustom(string table, string query)
+        {
+            ArrayList res = new ArrayList();
+            if (serverType == "SQL")
+                res = databaseSQL.obtenerCustom(table,query);
+            else if (serverType == "MySQL")
+            {
+                res = null;
+            }
+            return res;
+        }
+
+
         public string baja(string col, string value, string table)
         {
             string res = "";
