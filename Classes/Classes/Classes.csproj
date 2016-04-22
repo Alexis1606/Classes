@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,25 +31,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="MySql.Data">
-      <HintPath>..\Drivers mysql\v4.5\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\Drivers mysql\v4.5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.Entity.EF5">
-      <HintPath>..\Drivers mysql\v4.5\MySql.Data.Entity.EF5.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\Drivers mysql\v4.5\MySql.Data.Entity.EF5.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.Entity.EF6">
-      <HintPath>..\Drivers mysql\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\Drivers mysql\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Fabric.Plugin">
-      <HintPath>..\Drivers mysql\v4.5\MySql.Fabric.Plugin.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\Drivers mysql\v4.5\MySql.Fabric.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Web">
-      <HintPath>..\Drivers mysql\v4.5\MySql.Web.dll</HintPath>
+      <HintPath>..\..\..\..\..\Documents\Drivers mysql\v4.5\MySql.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Archivos.cs" />
     <Compile Include="DataBase.cs" />

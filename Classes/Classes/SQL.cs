@@ -128,7 +128,7 @@ namespace Classes
         public string baja(string col, string value,string table)
         {
             String error = "";
-            query = "delete " + table + " where " + col + " = " + value+(";");
+            query = "delete " + table + " where " + col + " = '" + value+("';");
             if (this.conectar())
             {
                 SqlCommand cmd = new SqlCommand(query, SQLconn);
