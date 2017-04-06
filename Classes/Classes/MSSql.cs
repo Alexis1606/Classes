@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    class MSSql
+    public class MSSql
     {
         public static string FirstDataFromTable(DataTable dt)
         {
