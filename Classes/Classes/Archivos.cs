@@ -29,17 +29,24 @@ namespace Classes
           Recive como parámetro la ruta en la que se encuentra el archivo. */
         public static String[] leerArchivo(String ruta)
         {
-            int counter = 0;
-            string line;
-            ArrayList arreglo = new ArrayList();
-            System.IO.StreamReader file = new System.IO.StreamReader(@ruta);
-            while ((line = file.ReadLine()) != null)
+            try
             {
-                arreglo.Add(line + "\n");
-                counter++;
+                int counter = 0;
+                string line;
+                ArrayList arreglo = new ArrayList();
+                System.IO.StreamReader file = new System.IO.StreamReader(@ruta);
+                while ((line = file.ReadLine()) != null)
+                {
+                    arreglo.Add(line + "\n");
+                    counter++;
+                }
+                file.Close();
+                return arrayListToArray(arreglo);
             }
-            file.Close();
-            return arrayListToArray(arreglo);
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         //Receives an array and converts it to a sring array.
