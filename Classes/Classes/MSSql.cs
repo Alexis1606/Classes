@@ -33,6 +33,7 @@ namespace Classes
             con.Open();
             dt.Load(com.ExecuteReader());
             con.Close();
+            con.Dispose();
             return dt;
         }
         public static string FirstDataFromTable(string ConnectionString, string stored, Parameter[] parameters)
